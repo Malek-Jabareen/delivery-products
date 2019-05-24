@@ -1,9 +1,15 @@
 import React from 'react';
+import Product from "./Product";
 
-const ProductComponent = () => {
+
+export interface IProps {
+    product: Product;
+}
+
+const ProductComponent = (props : IProps) => {
     return (
         <div>
-            <span></span>
+            <span>{props.product.name}</span>
         </div>
     );
 };
