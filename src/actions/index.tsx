@@ -13,7 +13,11 @@ function createProduct(product: any): any {
             return new Product(product.fedex.id, product.fedex.name, product.fedex.description, product.type, product.fedex.price, product.fedex.creationData, product.fedex.thumbnailUrl, product.fedex.url);
         }
         case 2: {
-            return new Product(product.ups[0].id, product.ups[0].name, product.ups[0].description, product.type, product.ups[0].price, product.ups[0].creationData, product.ups[0].thumbnailUrl, product.ups[0].url);
+            let newProducts: Product [] = [];
+            product.ups.forEach(function (product: any) {
+                newProducts.push(new Product(product.id, product.name, product.description, product.type, product.price, product.creationData, product.thumbnailUrl, product.url));
+            });
+            return newProducts;
         }
         default : {
             return new Product(product.id, product.name, product.description, product.type, product.price, product.creationData, product.thumbnailUrl, product.url);
@@ -26,7 +30,11 @@ export const fetchProducts = () =>
         let myProducts: Product [] = [];
         await MSBitProducts.get('/deliveryProducts/products.json ').then(function (response) {
             response.data.forEach(function (product: any) {
-                myProducts.push(createProduct(product));
+                let productsToPush: any = createProduct(product);
+                if (typeof productsToPush.length == "undefined")
+                    myProducts.push(productsToPush);
+                else
+                    myProducts.push(...productsToPush);
             });
         });
         dispatch({type: 'FETCH_PRODUCTS', payload: myProducts});

@@ -19,8 +19,10 @@ class ProductList extends React.Component<IProps> {
     renderProducts = () => {
         return this.props.products.map((product: Product) => {
             return (
-                <div>
-                    {product.description}
+                <div key={product.id}>
+                    <ProductComponent
+                        product={product}
+                    />
                 </div>
             );
         });
