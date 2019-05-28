@@ -1,5 +1,5 @@
 export default class Product {
-    constructor(private _id: number, private _name: string, private _description: string, private _type: number, private  _price: number, private _creationDate: Date, private _thumbnailUrl: string, private _url: string) {
+    constructor(private _id: number, private _name: string, private _description: string, private  _price: number, private _creationDate: Date, private _thumbnailUrl: string, private _url: string) {
     }
 
     get id(): number {
@@ -12,10 +12,6 @@ export default class Product {
 
     get description(): string {
         return this._description;
-    }
-
-    get type(): number {
-        return this._type;
     }
 
     get price(): number {

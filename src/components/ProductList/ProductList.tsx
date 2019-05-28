@@ -1,51 +1,86 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import ProductComponent from '../Product/ProductComponent';
-import {fetchProducts} from '../../actions/';
-import {IReducerState} from '../../reducers';
 import Product from "../Product/Product";
-
-export interface IProps {
-    fetchProducts: () => void | null,
-    products: Product []
-}
+import './ProductList.scss';
+import {SORT_TYPES} from "../UI/DropDown/DropDown";
+import {IProps} from "./ProductListProps";
+import {DELETE_MESSAGE} from "../UI/Consts";
 
 class ProductList extends React.Component<IProps> {
 
-    componentDidMount(): void {
-        this.props.fetchProducts();
+    deleteProduct = (product: Product): any => {
+        if (this.isProductSelected(product))
+            this.props.selectProduct(null);
+        this.props.deleteProduct(product);
+        this.props.togglePopUp(DELETE_MESSAGE.subject, DELETE_MESSAGE.content1 + " " + product.name + " " + DELETE_MESSAGE.content2);
+    };
+
+    isProductSelected = (product: Product) => this.props.selectedProduct && this.props.selectedProduct.id === product.id
+
+
+    showProductDetails = (event: any, product: Product) => {
+        if (event.target.className === 'delete-product')
+            return;
+        this.props.changeOffset(window.pageYOffset);
+        this.props.selectProduct(product);
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        }, 100);
+    };
+
+    sort(products: Product []): Product [] {
+        switch (this.props.sortBy) {
+            case (SORT_TYPES.name):
+                return products.sort((a: Product, b: Product) => (a.name > b.name) ? 1 : -1);
+            case(SORT_TYPES.creationDate):
+                return products.sort((a: Product, b: Product) => (a.creationDate > b.creationDate) ? 1 : -1);
+            case(SORT_TYPES.description):
+                return products.sort((a: Product, b: Product) => (a.description > b.description) ? 1 : -1);
+            case(SORT_TYPES.price):
+                return products.sort((a: Product, b: Product) => (a.price > b.price) ? 1 : -1);
+            case(SORT_TYPES.insertionDate):
+                return products.sort((a: Product, b: Product) => (a.id > b.id) ? 1 : -1);
+            default:
+                return products;
+        }
     }
 
+
     renderProducts = () => {
-        return this.props.products.map((product: Product) => {
+        const searchAndSortedProducts: Product [] = this.sort(this.props.products.filter((product: Product) => {
+            return product.name.indexOf(this.props.searchKey) >= 0
+        }));
+        return searchAndSortedProducts.map((product: Product) => {
             return (
-                <div key={product.id}>
                     <ProductComponent
                         product={product}
+                        key={product.id}
+                        togglePopUp={this.props.togglePopUp}
+                        changeOffset={this.props.changeOffset}
+                        deleteProduct={this.deleteProduct}
+                        selectProduct={this.props.selectProduct}
+                        isProductSelected={this.isProductSelected}
+                        showProductDetails={this.showProductDetails}
                     />
-                </div>
             );
         });
     };
 
-    render(): any {
+    renderByStatus(): any {
         const productsToBeRendered = this.renderProducts();
-        if (!productsToBeRendered) return <div>Loading...</div>;
+        if (!productsToBeRendered) return 'Loading...';
         else if (productsToBeRendered.length > 0)
-            return (
-                <div>
-                    {this.renderProducts()}
-                </div>
-            );
-        else return <div>No data to display</div>
+            return productsToBeRendered;
+        else return <div className="no-data"><span>No data to display</span></div>;
+    }
+
+    render(): any {
+        return (
+            <div className="product-list-container" style={!this.props.selectedProduct ? {flex: "unset"} : {}}>
+                {this.renderByStatus()}
+            </div>
+        );
     }
 }
 
-const mapStateToProps = (state: IReducerState) => {
-    return {products: state.products};
-};
-
-export default connect<IReducerState, any, any, IProps>(
-    mapStateToProps,
-    {fetchProducts}
-)(ProductList);
+export default ProductList;
