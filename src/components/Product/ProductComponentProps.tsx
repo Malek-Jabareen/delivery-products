@@ -7,5 +7,5 @@ export interface IProps {
     product: Product,
     togglePopUp: (subject: string, content: string) => void,
     showProductDetails: (e: any, product: Product) => void,
-    isProductSelected: (product:Product) => boolean,
+    isProductSelected: (product:Product) => boolean | false,
 }

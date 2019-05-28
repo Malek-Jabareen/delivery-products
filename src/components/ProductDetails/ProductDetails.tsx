@@ -41,7 +41,7 @@ class ProductDetails extends React.Component<IProps> {
         this.props.editProduct(myProduct);
         this.props.selectProduct(null);
         window.scrollTo(0, this.props.pageLastY);
-        this.props.togglePopUp(EDIT_MESSAGE.subject, EDIT_MESSAGE.content1 + " " + myProduct.name + " " + EDIT_MESSAGE.content2);
+        this.props.togglePopUp(EDIT_MESSAGE.subject, EDIT_MESSAGE.content1  + myProduct.name  + EDIT_MESSAGE.content2);
     };
 
 

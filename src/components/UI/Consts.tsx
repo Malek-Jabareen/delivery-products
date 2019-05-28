@@ -17,14 +17,22 @@ const FIELDS = {
 
 const EDIT_MESSAGE = {
     subject: "Edit Product",
-    content1: "Product",
-    content2: "edited successfully."
+    content1: "Thank you for updating product \"",
+    content2: "\", The product edited successfully."
 };
 
 const DELETE_MESSAGE = {
-    subject: "Delete Product",
-    content1: "Product",
-    content2: "deleted successfully."
+    subject: "Delete",
+    content1: "Product \"",
+    content2: "\" deleted successfully."
 };
 
-    export {VALIDATION_ERROR_MESSAGES,FIELDS,FIELDS_TYPES,EDIT_MESSAGE,DELETE_MESSAGE}
+const SORT_TYPES = {
+    name: "Name",
+    description: "Description",
+    creationDate: "Creation Date",
+    insertionDate: "Insertion Date",
+    price: "Price"
+};
+
+    export {VALIDATION_ERROR_MESSAGES,FIELDS,FIELDS_TYPES,EDIT_MESSAGE,DELETE_MESSAGE,SORT_TYPES}

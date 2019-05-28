@@ -1,15 +1,6 @@
 import React from 'react';
 import './DropDown.scss';
-
-const SORT_TYPES = {
-    name: "Name",
-    description: "Description",
-    creationDate: "Creation Date",
-    insertionDate: "Insertion Date",
-    price: "Price"
-};
-
-export {SORT_TYPES};
+import {SORT_TYPES} from "../Consts";
 
 export interface IProps {
     sortProducts: (sortType: string) => void

@@ -2,9 +2,8 @@ import React from 'react';
 import ProductComponent from '../Product/ProductComponent';
 import Product from "../Product/Product";
 import './ProductList.scss';
-import {SORT_TYPES} from "../UI/DropDown/DropDown";
 import {IProps} from "./ProductListProps";
-import {DELETE_MESSAGE} from "../UI/Consts";
+import {DELETE_MESSAGE,SORT_TYPES} from "../UI/Consts";
 
 class ProductList extends React.Component<IProps> {
 
@@ -12,7 +11,7 @@ class ProductList extends React.Component<IProps> {
         if (this.isProductSelected(product))
             this.props.selectProduct(null);
         this.props.deleteProduct(product);
-        this.props.togglePopUp(DELETE_MESSAGE.subject, DELETE_MESSAGE.content1 + " " + product.name + " " + DELETE_MESSAGE.content2);
+        this.props.togglePopUp(DELETE_MESSAGE.subject, DELETE_MESSAGE.content1 + product.name + DELETE_MESSAGE.content2);
     };
 
     isProductSelected = (product: Product) => this.props.selectedProduct && this.props.selectedProduct.id === product.id
@@ -52,16 +51,16 @@ class ProductList extends React.Component<IProps> {
         }));
         return searchAndSortedProducts.map((product: Product) => {
             return (
-                    <ProductComponent
-                        product={product}
-                        key={product.id}
-                        togglePopUp={this.props.togglePopUp}
-                        changeOffset={this.props.changeOffset}
-                        deleteProduct={this.deleteProduct}
-                        selectProduct={this.props.selectProduct}
-                        isProductSelected={this.isProductSelected}
-                        showProductDetails={this.showProductDetails}
-                    />
+                <ProductComponent
+                    product={product}
+                    key={product.id}
+                    togglePopUp={this.props.togglePopUp}
+                    changeOffset={this.props.changeOffset}
+                    deleteProduct={this.deleteProduct}
+                    selectProduct={this.props.selectProduct}
+                    isProductSelected={this.isProductSelected}
+                    showProductDetails={this.showProductDetails}
+                />
             );
         });
     };
