@@ -1,0 +1,101 @@
+.product-container, .no-data {
+  position: relative;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  border: #000000 3px double;
+  height: 160px;
+  display: flex;
+}
+
+.no-data {
+  span {
+    font-size: 30px;
+    margin: auto;
+  }
+}
+
+.product-container {
+  > div {
+    margin: 5px;
+  }
+
+  .image-wrapper {
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+  }
+
+  .details-container {
+    flex: 4;
+    position: relative;
+    display: flex;
+    flex-flow: column wrap;
+
+    > div {
+      display: block;
+      margin: 5px;
+    }
+
+    .product-name {
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 2rem;
+      max-height: 2rem;
+      overflow: hidden;
+      flex: 1;
+      word-break: break-all;
+      @media (max-width: 767px) {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        max-height: 2rem;
+      }
+    }
+
+    .product-description {
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.2rem;
+      max-height: 3.6rem;
+      overflow: scroll;
+      flex: 3;
+      word-break: break-all;
+      @media (max-width: 767px) {
+        font-size: 0.9rem;
+      }
+    }
+
+    .delete-button {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        height: 30px;
+        width: 80px;
+        padding: 0.35em 1.2em;
+        border: 0.1em solid #000000;
+        margin: 1px;
+        border-radius: 0.12em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #000000;
+        background: #FFFFFF;
+        text-align: center;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+
+      button:hover {
+        color: #FFFFFF;
+        background-color: #000000;
+        border: 0.1em solid #BBBBBB;
+      }
+    }
+  }
+  &.selected-product {background: #ccc}
+}

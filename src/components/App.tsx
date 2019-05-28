@@ -1,12 +1,6 @@
 import React from 'react';
-import ProductList from './ProductList/ProductList';
+import Store from '../components/Store/Store';
 
-const App = () => {
-    return (
-        <div>
-            <ProductList/>
-        </div>
-    );
-};
+const App = () => <Store/>;
 
 export default App;

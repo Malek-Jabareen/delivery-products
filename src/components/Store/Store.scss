@@ -1,0 +1,79 @@
+.app-container {
+  position: relative;
+  display: flex;
+  flex-flow: column wrap;
+  min-width: 400px;
+
+  .app-header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    background-color: #5f5f5f;
+    border: 1px solid #000000;
+    color: #f1f1f1;;
+
+    span {
+      font-family: 'Roboto', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      margin: auto 60px;
+      text-transform: uppercase;
+    }
+
+    @media (min-width: 1025px) {
+      height: 80px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) {
+      height: 80px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+      height: 80px;
+    }
+
+    @media (min-width: 400px) and (max-width: 767px) {
+      height: 40px;
+      span {
+        margin: auto 30px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+
+
+  .body-container {
+    position: relative;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+
+    @media (max-width: 767px) {
+      flex-flow: column wrap;
+      flex-direction: column-reverse;
+    }
+
+    .list-container {
+      display: flex;
+      flex: 2;
+      flex-flow: column;
+
+      .list-header {
+        height: 40px;
+        margin: 5px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .edit-product-details-container {
+      display: flex;
+      flex: 1;
+      flex-flow: column;
+
+      @media (min-width: 768px) {
+        margin-top: 50px;
+      }
+    }
+  }
+}
