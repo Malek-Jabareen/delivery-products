@@ -3,6 +3,7 @@ import './SearchBar.scss';
 
 export interface IProps {
     searchProducts: (substring: string) => void,
+    setCurrentPage: (num: number) => void
 }
 
 class SearchBar extends React.Component<IProps> {
@@ -17,7 +18,10 @@ class SearchBar extends React.Component<IProps> {
             <div className="search">
                 <input type="text" className="searchTerm" placeholder="Search..."
                        value={this.state.searchValue}
-                       onChange={event => this.setState({searchValue: event.target.value})}/>
+                       onChange={event => {
+                           this.setState({searchValue: event.target.value})
+                           this.props.setCurrentPage(1);
+                       }}/>
                 <button type="submit" className="searchButton">
                     <i className="fa fa-search"/>
                 </button>

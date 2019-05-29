@@ -8,9 +8,13 @@ export interface IProps {
     sortProducts: (sortType: string) => void,
     selectProduct: (product: Product | null) => void | null,
     editProduct: (product: Product) => void | null,
+    countPages: (num: number) => void | null,
+    changePage: (num: number) => void | null,
+    currentPage: number,
     products: Product [],
     selectedProduct: Product,
     pageLastY: number,
     searchKey: string,
-    sortBy: string
+    sortBy: string,
+    lastPage: number
 }
