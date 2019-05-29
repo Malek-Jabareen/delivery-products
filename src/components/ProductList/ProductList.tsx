@@ -38,7 +38,7 @@ class ProductList extends React.Component<IProps> {
         this.props.selectProduct(product);
         setTimeout(function () {
             window.scrollTo(0, 0);
-        }, 100);
+        }, 150);
     };
 
     sort(products: Product []): Product [] {
@@ -135,15 +135,3 @@ export default connect<IReducerState, any, any, IProps>(
         changePage
     },
 )(ProductList);
-//
-// deleteProduct={this.props.deleteProduct}
-// changeOffset={this.props.changeOffset}
-// selectProduct={this.props.selectProduct}
-// searchKey={this.props.searchKey}
-// sortBy={this.props.sortBy}
-// products={this.props.products}
-// selectedProduct={this.props.selectedProduct}
-// setLastPage={this.countPages}
-// currentPage={this.props.currentPage}
-// changePage={this.props.changePage}
-// lastPage={this.props.lastPage}
