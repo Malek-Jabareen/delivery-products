@@ -49,3 +49,17 @@ export const sortProducts = (sort: string) => {
         payload: sort
     }
 };
+
+export const countPages = (num: number) => {
+    return {
+        type: 'COUNT_PAGES',
+        payload: num
+    }
+};
+
+export const changePage = (num: number) => {
+    return {
+        type: 'CHANGE_PAGE',
+        payload: num
+    }
+};

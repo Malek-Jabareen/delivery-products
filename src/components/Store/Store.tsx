@@ -4,7 +4,7 @@ import ProductDetails from "../ProductDetails/ProductDetails";
 import {IReducerState} from "../../reducers";
 import {connect} from "react-redux";
 import {
-    changeOffset,
+    changeOffset, changePage, countPages,
     deleteProduct,
     editProduct,
     fetchProducts,
@@ -17,21 +17,24 @@ import SearchBar from "../UI/SearchBar/SearchBar";
 import DropDown from "../UI/DropDown/DropDown";
 import PopUp from "../UI/PopUp/PopUp";
 import {IProps} from "./StoreProps";
+import Pagination from "../UI/Pagination/Pagination";
 
 class Store extends React.Component<IProps> {
     state = {
         showPopUp: false,
         popUpSubject: "",
-        popUpContent: ""
+        popUpContent: "",
     };
 
     componentDidMount(): void {
         this.props.fetchProducts();
     }
 
-    togglePopUp = (subject: string = "", content: string = "") => {
-        this.setState({showPopUp: !this.state.showPopUp, popUpSubject: subject, popUpContent: content});
-    };
+    togglePopUp = (subject: string = "", content: string = "") => this.setState({
+        showPopUp: !this.state.showPopUp,
+        popUpSubject: subject,
+        popUpContent: content,
+    });
 
     render() {
         return (<div className="app-container">
@@ -41,19 +44,20 @@ class Store extends React.Component<IProps> {
                 <div className="body-container">
                     <div className="list-container">
                         <div className="list-header">
-                            <SearchBar searchProducts={this.props.searchProducts}/>
-                            <DropDown sortProducts={this.props.sortProducts}/>
+                            <SearchBar searchProducts={this.props.searchProducts}
+                                       setCurrentPage={this.props.changePage}/>
+                            <DropDown
+                                sortProducts={this.props.sortProducts}
+                                setCurrentPage={this.props.changePage}/>
                         </div>
-                        <ProductList
-                            togglePopUp={this.togglePopUp}
-                            deleteProduct={this.props.deleteProduct}
-                            changeOffset={this.props.changeOffset}
-                            selectProduct={this.props.selectProduct}
-                            searchKey={this.props.searchKey}
-                            sortBy={this.props.sortBy}
-                            products={this.props.products}
-                            selectedProduct={this.props.selectedProduct}
-                        />
+                        <ProductList togglePopUp={this.togglePopUp}/>
+                        {
+                            this.props.products.length > 0 ? <Pagination
+                                currentPage={this.props.currentPage}
+                                lastPage={this.props.lastPage}
+                                changePage={this.props.changePage}/> : ""
+
+                        }
                     </div>
                     {this.props.selectedProduct ?
                         <div className="edit-product-details-container">
@@ -64,7 +68,7 @@ class Store extends React.Component<IProps> {
                                 selectProduct={this.props.selectProduct}
                                 changeOffset={this.props.changeOffset}
                                 editProduct={this.props.editProduct}
-                                pageLastY={this.props.pageLastY }
+                                pageLastY={this.props.pageLastY}
                             />
                         </div>
                         : ""}
@@ -80,11 +84,21 @@ class Store extends React.Component<IProps> {
     }
 }
 
-const mapStateToProps = ({selectedProduct, products, pageLastY, searchKey, sortBy}: IReducerState) => {
-    return {selectedProduct, products, pageLastY, searchKey, sortBy};
+const mapStateToProps = ({selectedProduct, products, pageLastY, searchKey, sortBy, lastPage, currentPage}: IReducerState) => {
+    return {selectedProduct, products, pageLastY, searchKey, sortBy, lastPage, currentPage};
 };
 
 export default connect<IReducerState, any, any, IProps>(
     mapStateToProps,
-    {fetchProducts, searchProducts, sortProducts, deleteProduct, changeOffset, selectProduct,editProduct},
+    {
+        fetchProducts,
+        searchProducts,
+        sortProducts,
+        deleteProduct,
+        changeOffset,
+        selectProduct,
+        editProduct,
+        countPages,
+        changePage
+    },
 )(Store);

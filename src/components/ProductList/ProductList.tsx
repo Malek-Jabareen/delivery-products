@@ -3,7 +3,19 @@ import ProductComponent from '../Product/ProductComponent';
 import Product from "../Product/Product";
 import './ProductList.scss';
 import {IProps} from "./ProductListProps";
-import {DELETE_MESSAGE,SORT_TYPES} from "../UI/Consts";
+import {DELETE_MESSAGE, SORT_TYPES} from "../UI/Consts";
+import {IReducerState} from "../../reducers";
+import {connect} from "react-redux";
+import {
+    changeOffset,
+    changePage,
+    countPages,
+    deleteProduct,
+    editProduct,
+    searchProducts,
+    selectProduct,
+    sortProducts,
+} from "../../actions";
 
 class ProductList extends React.Component<IProps> {
 
@@ -15,6 +27,8 @@ class ProductList extends React.Component<IProps> {
     };
 
     isProductSelected = (product: Product) => this.props.selectedProduct && this.props.selectedProduct.id === product.id
+
+    countPages = (products: Product [] = []) => this.props.countPages(products.length % 5 > 0 ? (Math.floor(products.length / 5)) + 1 : products.length / 5);
 
 
     showProductDetails = (event: any, product: Product) => {
@@ -44,12 +58,34 @@ class ProductList extends React.Component<IProps> {
         }
     }
 
+    search(products: Product[]): Product[] {
+        return products.filter((product: Product) => product.name.indexOf(this.props.searchKey) >= 0);
+    }
+
+    paginate(products: Product[]): Product[] {
+        let results: Product [] = [];
+        products.forEach((item, index) => {
+            if (!(index < 5 * (this.props.currentPage - 1) || index >= 5 * this.props.currentPage))
+                results.push(item);
+        });
+        if (results.length === 0 && this.props.currentPage === this.props.lastPage)
+            this.props.changePage(this.props.currentPage - 1);
+        return results;
+    }
+
 
     renderProducts = () => {
-        const searchAndSortedProducts: Product [] = this.sort(this.props.products.filter((product: Product) => {
-            return product.name.indexOf(this.props.searchKey) >= 0
-        }));
-        return searchAndSortedProducts.map((product: Product) => {
+        let result: Product [] = [];
+        // search
+        result = this.search(this.props.products);
+        //sort
+        result = this.sort(result);
+        //set pages by call back
+        this.countPages(result);
+        //paginate
+        result = this.paginate(result);
+        //render
+        return result.map((product: Product) => {
             return (
                 <ProductComponent
                     product={product}
@@ -66,7 +102,7 @@ class ProductList extends React.Component<IProps> {
     };
 
     renderByStatus(): any {
-        const productsToBeRendered = this.renderProducts();
+        const productsToBeRendered = this.props.products.length > 0 ? this.renderProducts() : [];
         if (!productsToBeRendered) return 'Loading...';
         else if (productsToBeRendered.length > 0)
             return productsToBeRendered;
@@ -82,4 +118,32 @@ class ProductList extends React.Component<IProps> {
     }
 }
 
-export default ProductList;
+const mapStateToProps = ({selectedProduct, products, pageLastY, searchKey, sortBy, lastPage, currentPage}: IReducerState) => {
+    return {selectedProduct, products, pageLastY, searchKey, sortBy, lastPage, currentPage};
+};
+
+export default connect<IReducerState, any, any, IProps>(
+    mapStateToProps,
+    {
+        searchProducts,
+        sortProducts,
+        deleteProduct,
+        changeOffset,
+        selectProduct,
+        editProduct,
+        countPages,
+        changePage
+    },
+)(ProductList);
+//
+// deleteProduct={this.props.deleteProduct}
+// changeOffset={this.props.changeOffset}
+// selectProduct={this.props.selectProduct}
+// searchKey={this.props.searchKey}
+// sortBy={this.props.sortBy}
+// products={this.props.products}
+// selectedProduct={this.props.selectedProduct}
+// setLastPage={this.countPages}
+// currentPage={this.props.currentPage}
+// changePage={this.props.changePage}
+// lastPage={this.props.lastPage}
