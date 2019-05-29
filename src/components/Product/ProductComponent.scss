@@ -21,6 +21,10 @@
   }
 
   .image-wrapper {
+    width: unset !important;
+    padding: unset !important;
+    margin: 5px !important;
+
     img {
       width: 150px;
       height: 150px;
