@@ -25,12 +25,7 @@ const Pagination = (props: IProps) => {
                 <button
                     className={props.currentPage === props.lastPage ? "disabled" : ""}
                     disabled={props.currentPage === props.lastPage}
-                    onClick={() => {
-                        props.changePage(props.currentPage + 1);
-                        setTimeout(function () {
-                            window.scrollTo(0, 0);
-                        }, 100);
-                    }}>
+                    onClick={() => props.changePage(props.currentPage + 1)}>
                     &rsaquo;
                 </button>
             </div>

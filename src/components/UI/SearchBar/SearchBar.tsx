@@ -19,7 +19,7 @@ class SearchBar extends React.Component<IProps> {
                 <input type="text" className="searchTerm" placeholder="Search..."
                        value={this.state.searchValue}
                        onChange={event => {
-                           this.setState({searchValue: event.target.value})
+                           this.setState({searchValue: event.target.value});
                            this.props.setCurrentPage(1);
                        }}/>
                 <button type="submit" className="searchButton">
