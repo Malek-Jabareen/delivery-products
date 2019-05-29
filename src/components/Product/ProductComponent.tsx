@@ -1,4 +1,7 @@
 import React from 'react';
+//@ts-ignore
+import Title from 'react-vanilla-tilt'
+
 import './ProductComponent.scss';
 import {IProps} from "./ProductComponentProps";
 
@@ -6,10 +9,10 @@ const ProductComponent = (props: IProps) => {
     return (
         <div className={"product-container" + (props.isProductSelected(props.product) ? " selected-product" : "")}
              onClick={(e) => props.showProductDetails(e, props.product)}>
-            <div className="image-wrapper">
+            <Title className="image-wrapper">
                 <img src={props.product.thumbnailUrl}
                      alt={props.product.id.toString()}/>
-            </div>
+            </Title>
             <div className="details-container">
                 <div className="product-name">
                     {props.product.name}
