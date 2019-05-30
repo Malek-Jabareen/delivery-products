@@ -32,6 +32,8 @@
     top: 25%;
     min-height: 100px;
     max-width: 400px;
+    display: flex;
+    flex-flow: column;
 
     h2 {
       margin-top: 0;
@@ -55,34 +57,40 @@
       }
     }
 
-    button {
-      height: 30px;
-      width: 80px;
-      padding: 0.35em 1.2em;
-      border: 0.1em solid #000000;
-      margin: 1px;
-      border-radius: 0.12em;
-      box-sizing: border-box;
-      text-decoration: none;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 300;
-      color: #000000;
-      background: #FFFFFF;
-      text-align: center;
-      transition: all 0.2s;
-      cursor: pointer;
-      float: right;
+    .button-wrapper-popup {
+      display: flex;
+      justify-content: flex-end;
 
-      &:hover {
-        color: #FFFFFF;
-        background-color: #000000;
-        border: 0.1em solid #BBBBBB;
+      button {
+        height: 30px;
+        width: 80px;
+        padding: 0.35em 1.2em;
+        border: 0.1em solid #000000;
+        margin: 1px;
+        border-radius: 0.12em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #000000;
+        background: #FFFFFF;
+        text-align: center;
+        transition: all 0.2s;
+        cursor: pointer;
+        float: right;
+
+        &:hover {
+          color: #FFFFFF;
+          background-color: #000000;
+          border: 0.1em solid #BBBBBB;
+        }
       }
     }
 
     .content {
       max-height: 30%;
       overflow: auto;
+      margin-bottom: 15px;
     }
 
     @media screen and (max-width: 767px) {

@@ -59,6 +59,9 @@ class ProductDetails extends React.Component<IProps> {
         return !this.props.selectedProduct ?
             null :
             (<div className="form-container">
+                    <div className="subject-wrapper">
+                        <span>EDIT PRODUCT</span>
+                    </div>
                     <div className="row">
                         <div className="edit-field-wrapper">
                             <img src={this.props.selectedProduct.thumbnailUrl}

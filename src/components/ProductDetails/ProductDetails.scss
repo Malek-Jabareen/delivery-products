@@ -119,6 +119,18 @@
       min-height: 160px;
       height: unset;
     }
+
+    .subject-wrapper {
+      position: absolute;
+      top: -1px;
+      left: 10%;
+      background: #FFFFFF;
+
+      span {
+        font-size: 13px;
+        font-weight: 200;
+      }
+    }
   }
 
   .scroll-back-container {

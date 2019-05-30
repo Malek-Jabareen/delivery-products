@@ -14,7 +14,9 @@ const PopUp = (props: IProps) => {
                 <h2>{props.subject}</h2>
                 <div className="close" onClick={props.togglePopUp}>×</div>
                 <div className="content">{props.content}</div>
-                <button onClick={props.togglePopUp}>Close</button>
+                <div className="button-wrapper-popup">
+                    <button onClick={props.togglePopUp}>Close</button>
+                </div>
             </div>
         </div>);
 };
