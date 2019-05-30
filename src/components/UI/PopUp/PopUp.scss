@@ -26,6 +26,7 @@
     padding: 20px;
     background: #fff;
     border-radius: 5px;
+    -webkit-border-radius: 5px;
     width: 50%;
     position: relative;
     transition: all 0.5s ease-in-out;
@@ -68,6 +69,7 @@
         border: 0.1em solid #000000;
         margin: 1px;
         border-radius: 0.12em;
+        -webkit-border-radius: 0.12em;
         box-sizing: border-box;
         text-decoration: none;
         font-family: 'Roboto', sans-serif;

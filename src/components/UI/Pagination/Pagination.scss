@@ -3,14 +3,15 @@
   justify-content: center;
   margin: 3px;
   padding: 3px;
+  height: 26px !important;
 
   .button-wrapper {
     display: flex;
     justify-content: center;
     flex-flow: column;
     margin: 0 5px;
-    width: 26px!important;
-    height: 26px!important;
+    width: 26px !important;
+    height: 26px !important;
 
     button {
       background-color: #ddd;
@@ -20,8 +21,9 @@
       text-decoration: none;
       cursor: pointer;
       border-radius: 100%;
-      width: 26px!important;
-      height: 26px!important;
+      -webkit-border-radius: 100%;
+      width: 26px !important;
+      height: 26px !important;
       font-size: 20px;
       font-weight: 200;
 
