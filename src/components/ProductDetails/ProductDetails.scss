@@ -9,19 +9,19 @@
     padding: 5px;
     flex-flow: column wrap;
 
-    .row:nth-child(1) {
+    .row:nth-child(2) {
       flex: 4;
     }
 
-    .row:nth-child(2) {
+    .row:nth-child(3) {
       flex: 2;
     }
 
-    .row:nth-child(3) {
+    .row:nth-child(4) {
       flex: 3;
     }
 
-    .row:nth-child(4) {
+    .row:nth-child(5) {
       flex: 1;
       margin-bottom: 22px;
 
@@ -35,7 +35,7 @@
       }
     }
 
-    .row:nth-child(5) {
+    .row:nth-child(6) {
       flex: 1;
       display: flex;
       justify-content: flex-end;
